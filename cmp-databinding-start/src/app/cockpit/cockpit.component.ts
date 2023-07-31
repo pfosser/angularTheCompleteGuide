@@ -10,7 +10,7 @@ export class CockpitComponent {
   @Output()
   serverCreated = new EventEmitter<ServerData>();
 
-  @Output()
+  @Output('bpCreated')
   blueprintCreated = new EventEmitter<ServerData>();
 
   newServerName = '';
