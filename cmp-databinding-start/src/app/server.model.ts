@@ -1,5 +1,10 @@
 export interface Server {
-  type: string;
+  type: 'server' | 'blueprint';
   name: string;
   content: string;
+}
+
+export interface ServerData {
+  serverName: string;
+  serverContent: string;
 }
