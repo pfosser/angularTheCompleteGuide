@@ -3,7 +3,9 @@ import {
   AfterContentInit,
   AfterViewInit,
   Component,
+  ContentChild,
   DoCheck,
+  ElementRef,
   Input,
   OnChanges,
   OnDestroy,
@@ -34,6 +36,9 @@ export class ServerElementComponent
   @Input()
   name!: string;
 
+  @ContentChild('contentParagraph', { static: true })
+  paragraph!: ElementRef;
+
   constructor() {
     console.log('constructor called!');
   }
@@ -52,6 +57,7 @@ export class ServerElementComponent
 
   ngAfterContentInit(): void {
     console.log('ngAfterContentInit called!');
+    console.log('Text content of paragraph', this.paragraph.nativeElement.textContent);
   }
 
   ngDoCheck(): void {
@@ -64,6 +70,7 @@ export class ServerElementComponent
 
   ngOnInit() {
     console.log('ngOnInit called!');
+    console.log('Text content of paragraph', this.paragraph.nativeElement.textContent);
   }
 
   ngOnDestroy(): void {
