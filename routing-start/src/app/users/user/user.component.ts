@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
     };
     // Without this the data shown in the template wouldn't be updated
     // when channging route and already being in this component
+    // Note. The unsubscription is handled by Angular
     this.route.params.subscribe((params: Params) => {
       this.user = {
         id: params['id'],
