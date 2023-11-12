@@ -13,7 +13,8 @@ import {
 export class DropdownDirective {
   private open: boolean = false;
 
-  @HostListener('document:click', ['$event']) toggleOpen(event: Event) {
+  @HostListener('document:click', ['$event'])
+  toggleOpen(event: Event) {
     this.open = this.elRef.nativeElement.contains(event.target)
       ? !this.open
       : false;

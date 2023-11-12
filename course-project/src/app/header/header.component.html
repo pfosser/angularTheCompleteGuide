@@ -5,26 +5,27 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="/recipes"
+            >Recipes</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelect('shopping-list')"
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/shopping-list"
             >Shopping List</a
           >
         </li>
       </ul>
       <ul class="navbar-nav navbar-right">
         <li class="nav-item dropdown" appDropdown>
-          <a
-            href="#"
-            class="nav-link dropdown-toggle"
-            id="navbarDropdown"
-            role="button"
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
             >Manage</a
           >
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Save Data</a></li>
-            <li><a class="dropdown-item" href="#">Fetch Data</a></li>
+            <li><a class="dropdown-item">Save Data</a></li>
+            <li><a class="dropdown-item">Fetch Data</a></li>
           </ul>
         </li>
       </ul>
