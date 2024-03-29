@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -41,8 +42,16 @@ export class AppComponent implements OnInit {
 
   private fetchPosts() {
     this.http
-      .get(
+      .get<Record<string, object>>(
         'https://ng-complete-guide-28b6c-default-rtdb.firebaseio.com/posts.json'
+      )
+      .pipe(
+        map((responseData) =>
+          Object.keys(responseData).map((k) => ({
+            ...responseData[k],
+            id: k,
+          }))
+        )
       )
       .subscribe((posts) => console.log(posts));
   }
