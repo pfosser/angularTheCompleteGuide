@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   @ViewChild('postForm')
   postForm!: NgForm;
 
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -54,6 +54,6 @@ export class AppComponent implements OnInit {
           }))
         )
       )
-      .subscribe((posts) => console.log(posts));
+      .subscribe((posts) => (this.loadedPosts = posts));
   }
 }
