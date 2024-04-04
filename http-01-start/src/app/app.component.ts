@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,10 @@ export class AppComponent implements OnInit {
     this.fetchPosts();
   }
 
-  onCreatePost(postData: { title: string; content: string }) {
+  onCreatePost(postData: Post) {
     // Send Http request
     this.http
-      .post(
+      .post<{ name: string }>(
         'https://ng-complete-guide-28b6c-default-rtdb.firebaseio.com/posts.json',
         postData
       )
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit {
 
   private fetchPosts() {
     this.http
-      .get<Record<string, object>>(
+      .get<Record<string, Post>>(
         'https://ng-complete-guide-28b6c-default-rtdb.firebaseio.com/posts.json'
       )
       .pipe(
