@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
 import { Post } from './post.model';
+import { PostsService } from './posts.service';
 
 @Component({
   selector: 'app-root',
@@ -17,49 +18,21 @@ export class AppComponent implements OnInit {
 
   isFetching = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private postsService: PostsService) {}
 
   ngOnInit() {
-    this.fetchPosts();
+    this.postsService.fetchPosts();
   }
 
   onCreatePost(postData: Post) {
-    // Send Http request
-    this.http
-      .post<{ name: string }>(
-        'https://ng-complete-guide-28b6c-default-rtdb.firebaseio.com/posts.json',
-        postData
-      )
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
+    this.postsService.createAndStorePost(postData.title, postData.content);
   }
 
   onFetchPosts() {
-    this.fetchPosts();
+    this.postsService.fetchPosts();
   }
 
   onClearPosts() {
     // Send Http request
-  }
-
-  private fetchPosts() {
-    this.isFetching = true;
-    this.http
-      .get<Record<string, Post>>(
-        'https://ng-complete-guide-28b6c-default-rtdb.firebaseio.com/posts.json'
-      )
-      .pipe(
-        map((responseData) =>
-          Object.keys(responseData).map((k) => ({
-            ...responseData[k],
-            id: k,
-          }))
-        )
-      )
-      .subscribe((posts) => {
-        this.isFetching = false;
-        this.loadedPosts = posts;
-      });
   }
 }
