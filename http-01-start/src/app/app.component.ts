@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
   loadedPosts: Post[] = [];
 
+  isFetching = false;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isFetching = true;
     this.http
       .get<Record<string, Post>>(
         'https://ng-complete-guide-28b6c-default-rtdb.firebaseio.com/posts.json'
@@ -54,6 +57,9 @@ export class AppComponent implements OnInit {
           }))
         )
       )
-      .subscribe((posts) => (this.loadedPosts = posts));
+      .subscribe((posts) => {
+        this.isFetching = false;
+        this.loadedPosts = posts;
+      });
   }
 }
