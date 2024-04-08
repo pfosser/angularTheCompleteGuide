@@ -63,8 +63,13 @@
       </li>
       }
     </ul>
-    } @else {
+    } @else if (isFetching &&!error) {
     <p>Loading...</p>
+    } @else if (error != null) {
+    <div class="alert alert-danger">
+      <h1>An error occurred!</h1>
+      <p>{{ error }}</p>
+    </div>
     }
   </div>
 </div>
