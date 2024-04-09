@@ -33,12 +33,15 @@ export class PostsService {
         'https://ng-complete-guide-28b6c-default-rtdb.firebaseio.com/posts.json'
       )
       .pipe(
-        map((responseData) =>
-          Object.keys(responseData).map((k) => ({
+        map((responseData) => {
+          if (responseData == null) {
+            return [];
+          }
+          return Object.keys(responseData).map((k) => ({
             ...responseData[k],
             id: k,
-          }))
-        ),
+          }));
+        }),
         catchError((errorRes) => {
           // send to analytics server
           return throwError(() => errorRes);
