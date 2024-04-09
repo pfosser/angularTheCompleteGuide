@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from './post.model';
-import { map } from 'rxjs';
+import { Subject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
+  error = new Subject<string>();
+
   constructor(private http: HttpClient) {}
 
   createAndStorePost(title: string, content: string) {

@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
 
@@ -10,7 +10,7 @@ import { PostsService } from './posts.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('postForm')
   postForm!: NgForm;
 
@@ -18,11 +18,17 @@ export class AppComponent implements OnInit {
 
   isFetching = false;
 
-  error = null;
+  error: string | null = null;
+
+  private errorSub!: Subscription;
 
   constructor(private http: HttpClient, private postsService: PostsService) {}
 
   ngOnInit() {
+    this.errorSub = this.postsService.error.subscribe(
+      (errorMessage) => (this.error = errorMessage)
+    );
+
     this.isFetching = true;
     this.postsService.fetchPosts().subscribe(
       (posts) => {
@@ -56,5 +62,9 @@ export class AppComponent implements OnInit {
     this.postsService.deletePosts().subscribe(() => {
       this.loadedPosts = [];
     });
+  }
+
+  ngOnDestroy(): void {
+    this.errorSub.unsubscribe();
   }
 }
