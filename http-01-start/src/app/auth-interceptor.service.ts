@@ -16,13 +16,6 @@ export class AuthInterceptorService implements HttpInterceptor {
     const modifiedReq = req.clone({
       headers: req.headers.append('Auth', 'xyz'),
     });
-    return next.handle(modifiedReq).pipe(
-      tap((event) => {
-        console.log(event);
-        if (event.type === HttpEventType.Response) {
-          console.log('Response arrived, body data:', event.body);
-        }
-      })
-    );
+    return next.handle(modifiedReq);
   }
 }
