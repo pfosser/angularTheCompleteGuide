@@ -4,7 +4,7 @@
 
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuthenticated">
           <a class="nav-link" routerLinkActive="active" routerLink="/recipes"
             >Recipes</a
           >
@@ -17,14 +17,17 @@
             >Shopping List</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!isAuthenticated">
           <a class="nav-link" routerLinkActive="active" routerLink="/auth"
             >Authenticate</a
           >
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right">
-        <li class="nav-item dropdown" appDropdown>
+      <ul class="nav justify-content-end">
+        <li class="nav-item" href="#" *ngIf="isAuthenticated">
+          <a class="nav-link">Logout</a>
+        </li>
+        <li class="nav-item dropdown" appDropdown *ngIf="isAuthenticated">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
             >Manage</a
           >
