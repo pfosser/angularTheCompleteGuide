@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AlertComponent } from '../shared/alert/alert.component';
 import { AuthResponseData, AuthService } from './auth.service';
 
 @Component({
@@ -15,7 +16,11 @@ export class AuthComponent {
 
   error: string | null = null;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {}
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -46,6 +51,7 @@ export class AuthComponent {
       error: (errorMessage) => {
         console.log(errorMessage);
         this.error = errorMessage;
+        this.showErrorAlert(errorMessage);
         this.isLoading = false;
       },
     });
@@ -55,5 +61,10 @@ export class AuthComponent {
 
   onHandleError() {
     this.error = null;
+  }
+
+  private showErrorAlert(errorMessage: string) {
+    const componentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
   }
 }
