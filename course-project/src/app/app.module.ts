@@ -16,8 +16,6 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ShoppingListModule,
-    AuthModule,
     SharedModule,
     CoreModule,
   ],
