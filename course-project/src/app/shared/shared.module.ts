@@ -4,6 +4,7 @@ import { AlertComponent } from './alert/alert.component';
 import { DropdownDirective } from './dropdown.directive';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { PlaceHolderDirective } from './placeholder.directive';
+import { LoggingService } from '../logging.service';
 
 @NgModule({
   declarations: [
@@ -20,5 +21,6 @@ import { PlaceHolderDirective } from './placeholder.directive';
     DropdownDirective,
     CommonModule,
   ],
+  providers: [LoggingService],
 })
 export class SharedModule {}
