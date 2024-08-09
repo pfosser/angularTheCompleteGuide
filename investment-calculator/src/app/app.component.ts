@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
+import { InvestmentInput } from './investment-input.model';
 import { UserInputComponent } from './user-input/user-input.component';
 
 @Component({
@@ -9,12 +10,7 @@ import { UserInputComponent } from './user-input/user-input.component';
   imports: [HeaderComponent, UserInputComponent],
 })
 export class AppComponent {
-  onCalculateInvestmentResult($event: {
-    initialInvestment: number;
-    annualInvestment: number;
-    expectedReturn: number;
-    duration: number;
-  }) {
+  onCalculateInvestmentResult($event: InvestmentInput) {
     console.log($event);
   }
 }
