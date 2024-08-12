@@ -12,7 +12,7 @@ import { InvestmentResult } from './investment-result.model';
   imports: [HeaderComponent, UserInputComponent, InvestmentResultsComponent],
 })
 export class AppComponent {
-  resultData: InvestmentResult[] = [];
+  resultData?: InvestmentResult[];
 
   onCalculateInvestmentResult($event: InvestmentInput) {
     console.log($event);

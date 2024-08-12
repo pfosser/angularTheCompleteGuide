@@ -10,5 +10,5 @@ import { InvestmentResult } from '../investment-result.model';
   styleUrl: './investment-results.component.css',
 })
 export class InvestmentResultsComponent {
-  results = input<InvestmentResult[]>();
+  results = input<InvestmentResult[] | undefined>();
 }
