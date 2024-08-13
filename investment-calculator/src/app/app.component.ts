@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { InvestmentInput } from './investment-input.model';
 import { UserInputComponent } from './user-input/user-input.component';
@@ -12,7 +12,7 @@ import { InvestmentResult } from './investment-result.model';
   imports: [HeaderComponent, UserInputComponent, InvestmentResultsComponent],
 })
 export class AppComponent {
-  resultData?: InvestmentResult[];
+  resultData = signal<InvestmentResult[] | undefined>(undefined);
 
   onCalculateInvestmentResult($event: InvestmentInput) {
     console.log($event);
