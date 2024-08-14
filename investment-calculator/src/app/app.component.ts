@@ -11,10 +11,4 @@ import { InvestmentResult } from './investment-result.model';
   templateUrl: './app.component.html',
   imports: [HeaderComponent, UserInputComponent, InvestmentResultsComponent],
 })
-export class AppComponent {
-  resultData = signal<InvestmentResult[] | undefined>(undefined);
-
-  onCalculateInvestmentResult($event: InvestmentInput) {
-    console.log($event);
-  }
-}
+export class AppComponent {}
