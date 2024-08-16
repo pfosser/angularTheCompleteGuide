@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { InvestmentResult } from '../investment-result.model';
 import { InvestmentService } from '../investment.service';
 
@@ -13,7 +13,10 @@ import { InvestmentService } from '../investment.service';
 export class InvestmentResultsComponent {
   private investmentService = inject(InvestmentService);
 
-  get results() {
-    return this.investmentService.resultData;
-  }
+  // in this way the writable signal of the service is hidden.
+  // The computed signal is readonly
+  results = computed(() => this.investmentService.resultData());
+
+  // Alternative
+  // results = this.investmentService.resultData.asReadonly();
 }
