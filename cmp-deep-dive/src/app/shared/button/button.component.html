@@ -1,4 +1,6 @@
 <span> <ng-content /> </span>
 <span class="icon">
-  <ng-content select="icon" />
+  <!-- The content inside the ng-content is a fall-back, e.g. what is used if ng-content fails in
+    substituting -->
+  <ng-content select="icon">→</ng-content>
 </span>
