@@ -16,10 +16,10 @@ import {
   styleUrl: './control.component.css',
   encapsulation: ViewEncapsulation.None,
   // This should be the preferred way now
-  host: {
-    class: 'control',
-    '(click)': 'onClick()',
-  },
+  // host: {
+  //   class: 'control',
+  //   '(click)': 'onClick()',
+  // },
 })
 export class ControlComponent {
   // This now exists for compatibility reasons
