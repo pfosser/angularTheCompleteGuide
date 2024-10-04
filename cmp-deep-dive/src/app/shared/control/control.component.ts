@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   Component,
   contentChild,
   ContentChild,
@@ -23,7 +24,7 @@ import {
   //   '(click)': 'onClick()',
   // },
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit {
   // This now exists for compatibility reasons
   // @HostBinding('class') className = 'control';
 
@@ -47,5 +48,10 @@ export class ControlComponent {
     console.log('Clicked!');
     console.log(this.el);
     console.log(this.control());
+  }
+
+  ngAfterContentInit(): void {
+    // Here you are guaranteed to access the control field, no matter whether using
+    // the @ContentChild decorator or the contentChild() function
   }
 }
