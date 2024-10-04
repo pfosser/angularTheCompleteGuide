@@ -1,5 +1,7 @@
 import {
   AfterContentInit,
+  afterNextRender,
+  afterRender,
   Component,
   contentChild,
   ContentChild,
@@ -42,6 +44,18 @@ export class ControlComponent implements AfterContentInit {
   // v17.3
   private control =
     contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input');
+
+  constructor() {
+    afterRender(() => {
+      // Executed whenever anything anywhere change on the whole site
+      console.log('afterRender');
+    });
+
+    afterNextRender(() => {
+      // Executed after the next change in anything anywhere on the whole site
+      console.log('afterNextRender');
+    });
+  }
 
   // @HostListener('click')
   onClick() {
