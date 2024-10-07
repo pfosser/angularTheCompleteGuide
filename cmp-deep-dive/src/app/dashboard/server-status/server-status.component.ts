@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   DestroyRef,
+  effect,
   inject,
   OnDestroy,
   OnInit,
+  signal,
 } from '@angular/core';
 
 @Component({
@@ -15,24 +17,30 @@ import {
   styleUrl: './server-status.component.css',
 }) /*, OnDestroy */
 export class ServerStatusComponent implements OnInit, AfterViewInit {
-  currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+  currentStatus = signal<'online' | 'offline' | 'unknown'>('online');
 
   // private interval?: ReturnType<typeof setInterval>;
 
   private destroyRef = inject(DestroyRef);
 
-  constructor() {}
+  constructor() {
+    // Angular set up a subscription on the signal if it is
+    // used in a function passed to an effect
+    effect(() => {
+      console.log(this.currentStatus());
+    });
+  }
 
   ngOnInit(): void {
     console.log('ON INIT');
     const interval = setInterval(() => {
       const rnd = Math.random();
       if (rnd < 0.5) {
-        this.currentStatus = 'online';
+        this.currentStatus.set('online');
       } else if (rnd < 0.9) {
-        this.currentStatus = 'offline';
+        this.currentStatus.set('offline');
       } else {
-        this.currentStatus = 'unknown';
+        this.currentStatus.set('unknown');
       }
     }, 5000);
 
