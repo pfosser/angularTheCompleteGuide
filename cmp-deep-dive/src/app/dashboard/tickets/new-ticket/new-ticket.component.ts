@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   OnInit,
+  output,
   ViewChild,
   viewChild,
 } from '@angular/core';
@@ -24,6 +25,8 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   // private form = viewChild<ElementRef<HTMLFormElement>>('form');
   //private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
 
+  add = output<{ title: string; text: string }>();
+
   ngOnInit(): void {
     console.log('ON INIT');
     // console.log(this.form().nativeElement);
@@ -33,10 +36,8 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   // one possibility is to pass the form through a template variable
   // onSubmit(title: string, text: string, form: HTMLFormElement) {
   onSubmit(title: string, text: string) {
-    console.log('Entered title: ' + title);
-    console.log('Entered text: ' + text);
+    this.add.emit({ title, text });
     this.form?.nativeElement.reset();
-    // this.form()?.nativeElement.reset();
     // this.form()?.nativeElement.reset();
   }
 
