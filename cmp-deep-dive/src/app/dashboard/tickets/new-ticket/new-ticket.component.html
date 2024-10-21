@@ -1,8 +1,15 @@
-<form (ngSubmit)="onSubmit(titleInput.value, textInput.value)" #form>
+<form (ngSubmit)="onSubmit()" #form>
   <!-- You can use the same template var on multiple elements and
    you can add multiple template var on the same element -->
   <app-control label="Title">
-    ><input type="text" name="title" id="title" #titleInput #input />
+    ><input
+      type="text"
+      name="title"
+      id="title"
+      #titleInput
+      #input
+      [(ngModel)]="enteredTitle"
+    />
   </app-control>
   <app-control label="Request">
     ><textarea
@@ -11,6 +18,7 @@
       rows="3"
       #textInput
       #input
+      [(ngModel)]="enteredText"
     ></textarea>
   </app-control>
   <p>
