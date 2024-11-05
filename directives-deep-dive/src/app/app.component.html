@@ -10,5 +10,17 @@
   } -->
   <!-- <p *ngIf="isAdmin()">Only admins shoul see this!</p> -->
 
-  <p appAuth="admin">Only admins shoul see this!</p>
+  <!-- ng-template is a special element provided by Angular
+       and its job is that you can use it in one
+       of your component templates
+       to wrap some content. The idea behind ng-template is
+       that you can define some content that can eventually be
+       rendered onto the screen.-->
+  <!-- You can always use structural directives, the built-in ngIf
+       directive, on an ng-template element without the asterisk.
+      This asterisk is just syntactic sugar for automatically
+      adding this ng-template element behind the scenes. -->
+  <ng-template appAuth="admin">
+    <p>Only admins shoul see this!</p>
+  </ng-template>
 </main>
