@@ -12,6 +12,10 @@ import { AuthService } from './auth.service';
 @Directive({
   selector: '[appAuth]',
   standalone: true,
+  /* Note that since this is a structural directive, and in the end
+  it is applied to a template element, the log directive wouldn't have
+  any effect here. */
+  // hostDirectives: [LogDirective],
 })
 export class AuthDirective {
   userType = input.required<Permission>({ alias: 'appAuth' });
