@@ -23,11 +23,11 @@ export class AppComponent {
   ];
 
   onReset(index: number) {
-    // this.historicTemperatures[index] = 18;
+    this.historicTemperatures[index] = 18;
     // Needed because pipes by default cache their results
     // and return them unless their input change
-    const newTemps = [...this.historicTemperatures];
-    newTemps[index] = 18;
-    this.historicTemperatures = newTemps;
+    // const newTemps = [...this.historicTemperatures];
+    // newTemps[index] = 18;
+    // this.historicTemperatures = newTemps;
   }
 }
