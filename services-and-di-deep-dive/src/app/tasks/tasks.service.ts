@@ -3,7 +3,9 @@ import { Task } from './task.model';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
-  tasks = signal<Task[]>([]);
+  private tasks = signal<Task[]>([]);
+
+  allTasks = this.tasks.asReadonly();
 
   addTask(taskData: { title: string; description: string }) {
     this.tasks.update((oldTasks) => [
