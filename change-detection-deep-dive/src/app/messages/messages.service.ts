@@ -1,20 +1,14 @@
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
+// Using signals allows zone-less applications
 @Injectable({
   providedIn: 'root',
 })
 export class MessagesService {
-  messages$ = new BehaviorSubject<string[]>([]);
-
-  private messages: string[] = [];
-
-  get allMessages() {
-    return [...this.messages];
-  }
+  private messages = signal<string[]>([]);
+  allMessages = this.messages.asReadonly();
 
   addMessage(message: string) {
-    this.messages = [...this.messages, message];
-    this.messages$.next([...this.messages]);
+    this.messages.update((prevMessages) => [...prevMessages, message]);
   }
 }
