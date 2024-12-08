@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MessagesService } from '../messages.service';
 
+// With this setup (no signals and OnPush), the addition of a message
+// doesn't trigger a cd and the new message doesn't show up in the list
 @Component({
   selector: 'app-messages-list',
   standalone: true,
@@ -10,7 +12,9 @@ import { MessagesService } from '../messages.service';
 })
 export class MessagesListComponent {
   private messagesService = inject(MessagesService);
-  messages = this.messagesService.allMessages;
+  get messages() {
+    return this.messagesService.allMessages;
+  }
 
   get debugOutput() {
     console.log('[MessagesList] "debugOutput" binding re-evaluated.');
