@@ -1,5 +1,9 @@
 <ul>
-  @for (message of messages; track message) {
+  <!-- The async pipe takes care of:
+    * managing the subscription to the observable
+    * triggering the cd
+  -->
+  @for (message of messages$ | async; track message) {
   <li>{{ message }}</li>
   }
 </ul>
