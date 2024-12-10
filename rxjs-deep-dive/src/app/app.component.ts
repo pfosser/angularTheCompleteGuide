@@ -6,6 +6,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,16 @@ import {
 })
 export class AppComponent implements OnInit {
   clickCount = signal(0);
+  // toObservable can be used only in injection contexts
+  clickCount$ = toObservable(this.clickCount);
   private destroyRef = inject(DestroyRef);
 
   constructor() {
-    effect(() => {
-      console.log(`Clicked button ${this.clickCount()} times.`);
-    });
+    // effect(() => {
+    //   console.log(`Clicked button ${this.clickCount()} times.`);
+    // });
+    // toObservable can be used only in injection contexts
+    // toObservable(this.clickCount);
   }
 
   ngOnInit(): void {
@@ -28,9 +33,12 @@ export class AppComponent implements OnInit {
     //   .subscribe({
     //     next: (val) => console.log(val),
     //   });
-    // this.destroyRef.onDestroy(() => {
-    //   subscription.unsubscribe();
-    // });
+    const subscription = this.clickCount$.subscribe({
+      next: (val) => console.log(`Clicked button ${this.clickCount()} times.`),
+    });
+    this.destroyRef.onDestroy(() => {
+      subscription.unsubscribe();
+    });
   }
 
   onClick() {
