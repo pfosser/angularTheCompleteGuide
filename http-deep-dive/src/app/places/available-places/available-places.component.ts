@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Place } from '../place.model';
 import { PlacesContainerComponent } from '../places-container/places-container.component';
 import { PlacesComponent } from '../places.component';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-available-places',
@@ -31,11 +32,12 @@ export class AvailablePlacesComponent implements OnInit {
           // request
         }*/
       )
+      .pipe(map((resData) => resData.places))
       .subscribe({
-        next: (response) => {
+        next: (places) => {
           //console.log(response);
-          console.log(response.places); // default observe
           // console.log(response.body?.places); // if observing response
+          this.places.set(places);
         },
       });
 
