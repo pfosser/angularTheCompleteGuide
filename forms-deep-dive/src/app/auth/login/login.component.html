@@ -1,4 +1,10 @@
-<form>
+<!-- By assigning ngForm to the template variabile, that
+ variable gets a special value offered by Angular, instead
+ of the default HTMLFormElement it would gets without
+ any assignment.
+ It is to that object that the element marked with ngModel
+ are registered. -->
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
   <h2>Login</h2>
 
   <div class="control-row">
