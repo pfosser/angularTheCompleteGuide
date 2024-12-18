@@ -15,7 +15,15 @@
            directive -->
       <!-- Adding these validations doesn't prevent the submission of the form, it
            changes an internal state -->
-      <input id="email" type="email" name="email" ngModel required email />
+      <input
+        id="email"
+        type="email"
+        name="email"
+        ngModel
+        required
+        email
+        #email="ngModel"
+      />
     </div>
 
     <div class="control no-margin">
@@ -27,9 +35,18 @@
         ngModel
         required
         minlength="6"
+        #password="ngModel"
       />
     </div>
 
     <button class="button">Login</button>
   </div>
+
+  <!-- The following approach doesn't work because the first time the template is rendered;
+     the data structures are not initialized
+    form.form.controls['email'].touched &&
+    form.form.controls['password'].touched && -->
+  @if (email.touched && password.touched && form.form.invalid) {
+    <p class="control-error">Invalid values detected</p>
+  }
 </form>
