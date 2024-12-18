@@ -10,12 +10,24 @@
   <div class="control-row">
     <div class="control no-margin">
       <label for="email">Email</label>
-      <input id="email" type="email" name="email" ngModel />
+      <!-- When Angular takes control of the form, also the standard HTML validations
+           are go under its control. required, e.g. is essentially registered as a
+           directive -->
+      <!-- Adding these validations doesn't prevent the submission of the form, it
+           changes an internal state -->
+      <input id="email" type="email" name="email" ngModel required email />
     </div>
 
     <div class="control no-margin">
       <label for="password">Password</label>
-      <input id="password" type="password" name="password" ngModel />
+      <input
+        id="password"
+        type="password"
+        name="password"
+        ngModel
+        required
+        minlength="6"
+      />
     </div>
 
     <button class="button">Login</button>
