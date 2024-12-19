@@ -1,57 +1,17 @@
-<!-- By assigning ngForm to the template variabile, that
- variable gets a special value offered by Angular, instead
- of the default HTMLFormElement it would gets without
- any assignment.
- It is to that object that the element marked with ngModel
- are registered. -->
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+<form>
   <h2>Login</h2>
 
   <div class="control-row">
     <div class="control no-margin">
       <label for="email">Email</label>
-      <!-- When Angular takes control of the form, also the standard HTML validations
-           are go under its control. required, e.g. is essentially registered as a
-           directive -->
-      <!-- Adding these validations doesn't prevent the submission of the form, it
-           changes an internal state -->
-      <input
-        id="email"
-        type="email"
-        name="email"
-        ngModel
-        required
-        email
-        #email="ngModel"
-      />
+      <input id="email" type="email" />
     </div>
 
     <div class="control no-margin">
       <label for="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        name="password"
-        ngModel
-        required
-        minlength="6"
-        #password="ngModel"
-      />
+      <input id="password" type="password" />
     </div>
 
     <button class="button">Login</button>
   </div>
-
-  <!-- The following approach doesn't work because the first time the template is rendered;
-     the data structures are not initialized
-    form.form.controls['email'].touched &&
-    form.form.controls['password'].touched && -->
-  @if (email.touched && email.dirty && email.invalid) {
-    <p class="control-error">Invalid email address entered.</p>
-  }
-  @if (password.touched && password.dirty && password.invalid) {
-    <p class="control-error">
-      Invalid password entered - must be at least 6 characters long.
-    </p>
-  }
 </form>
