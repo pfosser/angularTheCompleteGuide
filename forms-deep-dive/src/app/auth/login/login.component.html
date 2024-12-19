@@ -1,6 +1,6 @@
 <!-- Some work on the template has still to be done but it is
      only a linking work -->
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2>Login</h2>
 
   <div class="control-row">

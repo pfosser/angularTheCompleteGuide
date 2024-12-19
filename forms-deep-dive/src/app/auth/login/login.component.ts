@@ -14,5 +14,12 @@ export class LoginComponent {
     password: new FormControl(''),
   });
 
-  onSubmit() {}
+  onSubmit() {
+    console.log(this.form);
+    // with reactive form you have the advantage that Angular understands
+    // the structure of your form and there is better typing support
+    const enteredEmail = this.form.value.email;
+    const enteredPassword = this.form.value.password;
+    console.log(enteredEmail, enteredPassword);
+  }
 }
