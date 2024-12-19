@@ -29,6 +29,21 @@ export class LoginComponent {
     // template-driven approach, is created with help of the template.  So
     //  it's only after the template rendering that this form is fully initialized.
     afterNextRender(() => {
+      const savedForm = window.localStorage.getItem('saved-login-form');
+      if (savedForm) {
+        const loadedFormData = JSON.parse(savedForm);
+        const savedEmail = loadedFormData.email;
+        // the timer is to wait for the full init of the
+        // control
+        setTimeout(() => {
+          this.form().setValue({
+            email: savedEmail,
+            password: '',
+          });
+          // Or if wanting to target a specific control
+          //   this.form().controls['email'].setValue(savedEmail);
+        }, 1);
+      }
       const subscription = this.form()
         .valueChanges?.pipe(debounceTime(500))
         .subscribe({
