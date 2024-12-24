@@ -1,13 +1,13 @@
 import { NoTaskComponent } from './tasks/no-task/no-task.component';
-import { TasksComponent } from './tasks/tasks.component';
+import { UserTasksComponent } from './users/user-tasks/user-tasks.component';
 
 export const routes = [
   {
-    path: '',
+    path: '', // <your-domain>/
     component: NoTaskComponent,
   },
   {
-    path: 'tasks', // or <your-domain>/tasks
-    component: TasksComponent,
+    path: 'users/:userId', // <your-domain>/users/<uid>
+    component: UserTasksComponent,
   },
 ];
