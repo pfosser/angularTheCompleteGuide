@@ -1,8 +1,9 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 
 import { User } from '../users/user/user.model';
 import { TaskComponent } from './task/task.component';
 import { Task } from './task/task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -15,7 +16,11 @@ export class TasksComponent {
   // By default child routes cannot get parent route parameters through input
   // binding (only through ActivatedRoute).
   // To overome the limitation you have to explicitly configure it (see app.config.ts)
-  userId = input.required<User>();
+  userId = input.required<string>();
 
-  userTasks: Task[] = [];
+  private tasksService = inject(TasksService);
+
+  userTasks = computed(() =>
+    this.tasksService.allTasks().filter((t) => t.userId === this.userId()),
+  );
 }
