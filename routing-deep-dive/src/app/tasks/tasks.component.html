@@ -1,3 +1,10 @@
+<p>
+  <!-- Add query parameters to kink via queryParams property of the
+       routerLink directive -->
+  <a routerLink="./" [queryParams]="{ order: 'asc' }">
+    Sort Ascending / Descending
+  </a>
+</p>
 <ul>
   @for (task of userTasks(); track task.id) {
     <li>
