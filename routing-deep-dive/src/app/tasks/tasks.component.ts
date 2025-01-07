@@ -19,6 +19,9 @@ export class TasksComponent {
   // To overome the limitation you have to explicitly configure it (see app.config.ts)
   userId = input.required<string>();
 
+  // Query parametere binding
+  order = input<'asc' | 'desc'>();
+
   private tasksService = inject(TasksService);
 
   userTasks = computed(() =>
