@@ -5,6 +5,7 @@ import {
   inject,
   input,
   OnInit,
+  signal,
 } from '@angular/core';
 
 import { User } from '../users/user/user.model';
@@ -29,21 +30,30 @@ export class TasksComponent implements OnInit {
   // Query parametere binding
   // order = input<'asc' | 'desc'>();
 
-  order?: 'asc' | 'desc';
+  order = signal<'asc' | 'desc'>('desc');
 
   private tasksService = inject(TasksService);
 
   private destroyRef = inject(DestroyRef);
 
   userTasks = computed(() =>
-    this.tasksService.allTasks().filter((t) => t.userId === this.userId()),
+    this.tasksService
+      .allTasks()
+      .filter((t) => t.userId === this.userId())
+      .sort((a, b) => {
+        if (this.order() === 'desc') {
+          return a.id > b.id ? -1 : 1;
+        } else {
+          return a.id > b.id ? 1 : -1;
+        }
+      }),
   );
 
   private activatedRoute = inject(ActivatedRoute);
 
   ngOnInit() {
     const subscription = this.activatedRoute.queryParams.subscribe({
-      next: (params) => (this.order = params['order']),
+      next: (params) => this.order.set(params['order']),
     });
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
