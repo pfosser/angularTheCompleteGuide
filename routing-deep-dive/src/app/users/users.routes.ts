@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { NewTaskComponent } from '../tasks/new-task/new-task.component';
-import { TasksComponent } from '../tasks/tasks.component';
+import { resolveUserTasks, TasksComponent } from '../tasks/tasks.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +16,13 @@ export const routes: Routes = [
   {
     path: 'tasks', // <your-domain>/users/<uid>/tasks
     component: TasksComponent,
+    // The default behavior by Angular is that these resolver functions will be re executed
+    // if a route parameter changes, but not if a query parameter changes.
+    // You can configure it differently, though
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    resolve: {
+      userTasks: resolveUserTasks,
+    },
   },
   {
     path: 'tasks/new',
