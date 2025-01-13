@@ -1,6 +1,5 @@
-import { Component, DestroyRef, inject, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import {
-  ActivatedRoute,
   ActivatedRouteSnapshot,
   ResolveFn,
   RouterLink,
@@ -23,6 +22,20 @@ export class UserTasksComponent {
   // Router parameter binding on the key 'message' of the static data associated
   // with the route
   message = input.required<string>();
+
+  // private activatedRoute = inject(ActivatedRoute);
+
+  // private destroyRef = inject(DestroyRef);
+
+  // ngOnInit(): void {
+  //   // data is an observable emitting the merge of dynamic and static route data
+  //   // every time the route changes
+  //   const subscription = this.activatedRoute.data.subscribe({
+  //     next: (data) => console.log(data),
+  //   });
+
+  //   this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  // }
 }
 
 export const resolveUserName: ResolveFn<string> = (
