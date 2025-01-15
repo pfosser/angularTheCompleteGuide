@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NoTaskComponent } from './tasks/no-task/no-task.component';
 import {
+  resolveTitle,
   resolveUserName,
   UserTasksComponent,
 } from './users/user-tasks/user-tasks.component';
@@ -12,6 +13,7 @@ export const routes: Routes = [
   {
     path: '', // <your-domain>/
     component: NoTaskComponent,
+    title: 'No task selected',
   },
   {
     path: 'users/:userId', // <your-domain>/users/<uid>
@@ -32,6 +34,7 @@ export const routes: Routes = [
       // in an input with the name of the key, thanks to route parameter binding
       userName: resolveUserName,
     },
+    title: resolveTitle,
   },
   {
     // catch-all route
