@@ -19,7 +19,7 @@ import { routes as userRoutes } from './users/users.routes';
 
 const dummyCanMatch: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
   const router = inject(Router);
-  const shouldGetAccess = Math.random() < 0.5;
+  const shouldGetAccess = Math.random() < 1;
   if (shouldGetAccess) {
     return true;
   }

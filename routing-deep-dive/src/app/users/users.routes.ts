@@ -22,7 +22,7 @@ export const routes: Routes = [
     // The default behavior by Angular is that these resolver functions will be re executed
     // if a route parameter changes, but not if a query parameter changes.
     // You can configure it differently, though
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    runGuardsAndResolvers: 'always',
     resolve: {
       userTasks: resolveUserTasks,
     },
