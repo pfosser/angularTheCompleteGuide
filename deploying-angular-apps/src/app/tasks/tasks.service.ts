@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { afterNextRender, Injectable, signal } from '@angular/core';
 
 import { type NewTaskData } from './task/task.model';
 
@@ -33,11 +33,16 @@ export class TasksService {
   allTasks = this.tasks.asReadonly();
 
   constructor() {
-    const tasks = localStorage.getItem('tasks');
+    // Safe place to access browser-only features in a ssr app.
+    // The DOM exists only in the browser and it's there where
+    // the rendering happens.
+    afterNextRender(() => {
+      const tasks = localStorage.getItem('tasks');
 
-    if (tasks) {
-      this.tasks.set(JSON.parse(tasks));
-    }
+      if (tasks) {
+        this.tasks.set(JSON.parse(tasks));
+      }
+    });
   }
 
   addTask(taskData: NewTaskData, userId: string) {
@@ -56,7 +61,7 @@ export class TasksService {
 
   removeTask(id: string) {
     this.tasks.update((prevTasks) =>
-      prevTasks.filter((task) => task.id !== id)
+      prevTasks.filter((task) => task.id !== id),
     );
     this.saveTasks();
   }
