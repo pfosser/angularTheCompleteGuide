@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
+import { DetailsComponent } from './details/details.component';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
-  // the current component must be standalone too for this to work
-  // imports: [DetailsComponent],
+  standalone: true,
+  imports: [DetailsComponent],
 })
 export class WelcomeComponent {}
