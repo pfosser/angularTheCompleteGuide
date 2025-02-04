@@ -8,5 +8,12 @@
   </nav>
 </header>
 <main>
-  <app-welcome></app-welcome>
+  <router-outlet></router-outlet>
 </main>
+<!--  this also won't work like this because at the moment this app-routing.module is not wired up
+because we have no app module.  We removed that app module after all.
+Therefore, if you ng serve this, if you start the development server here,
+you will notice that this fails (actually it does not even compile)
+because in the app.component template here I'm using the router-outlet, but this won't work anymore
+because the app.component is a standalone component and does not know what to do with that router outlet
+and it also doesn't know about these routes.-->
