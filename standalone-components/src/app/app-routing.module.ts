@@ -11,14 +11,17 @@ const routes: Route[] = [
   },
   {
     path: 'about',
-    component: AboutComponent,
+    // component: AboutComponent,
+    // To lazy load it
+    loadComponent: () =>
+      import('./about/about.component').then((mod) => mod.AboutComponent),
   },
   {
     path: 'dashboard',
+    // To lazy load a group of components (alternative to wrapping them in
+    // a module)
     loadChildren: () =>
-      import('./dashboard/dashboard-routing.module').then(
-        (mod) => mod.DashboardRoutingModule
-      ),
+      import('./dashboard/routes').then((mod) => mod.DASHBOARD_ROUTES),
   },
 ];
 
