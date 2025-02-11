@@ -12,6 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore({
       counter: counterReducer,
+      // auth: authReducer // other slice of store state
     }),
   ],
 };
