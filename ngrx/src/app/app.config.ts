@@ -2,6 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 import { routes } from './app.routes';
 import { counterReducer } from './store/counter.reducer';
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
       counter: counterReducer,
       // auth: authReducer // other slice of store state
     }),
+    provideEffects(),
   ],
 };
