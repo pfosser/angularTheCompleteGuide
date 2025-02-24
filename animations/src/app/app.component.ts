@@ -12,14 +12,15 @@ import { Component } from '@angular/core';
         'normal',
         style({
           'background-color': 'red',
-          trasform: 'translateX(0)',
+          transform: 'translateX(0)',
         })
       ),
       state(
         'highlighted',
         style({
-          backgroundColor: 'blue',
-          trasform: 'translateX(100px)',
+          // must use the same naming style
+          'background-color': 'blue',
+          transform: 'translateX(100px)',
         })
       ),
     ]),
@@ -28,6 +29,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   state = 'normal'; // could be any kind of value
   list = ['Milk', 'Sugar', 'Bread'];
+
+  onAnimate() {
+    this.state = this.state === 'normal' ? 'highlighted' : 'normal';
+  }
 
   onAdd(item: string) {
     this.list.push(item);
