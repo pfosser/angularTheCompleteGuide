@@ -72,6 +72,37 @@ import { Component } from '@angular/core';
         animate(500),
       ]),
     ]),
+    trigger('list1', [
+      state(
+        'in',
+        style({
+          opacity: 1,
+          transform: 'translateX(0)', // css setup here
+        })
+      ),
+      // There is a specific state for this case that a element hasn't been added yet,
+      // that's void. So void is a reserved state name. You can't use it. You shouldn't
+      // override it. Void is provided by you of four cases where you do have an element
+      // in an end state which wasn't added to the dom at the beginning. Or of course you
+      // could also add void as the transition to state. So if you remove a element for
+      // example.
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100px)',
+        }),
+        animate(300),
+      ]),
+      transition('* => void', [
+        animate(
+          300,
+          style({
+            transform: 'translateX(100px)',
+            opacity: 0,
+          })
+        ),
+      ]),
+    ]),
   ],
 })
 export class AppComponent {
@@ -93,6 +124,6 @@ export class AppComponent {
   }
 
   onDelete(item: string) {
-    throw new Error('Method not implemented.');
+    this.list.splice(this.list.indexOf(item), 1);
   }
 }
