@@ -1,5 +1,6 @@
 import {
   animate,
+  group,
   keyframes,
   state,
   style,
@@ -140,13 +141,22 @@ import { Component } from '@angular/core';
         ),
       ]),
       transition('* => void', [
-        animate(
-          300,
-          style({
-            transform: 'translateX(100px)',
-            opacity: 0,
-          })
-        ),
+        // to make animations happen at the same time
+        group([
+          animate(
+            300,
+            style({
+              color: 'red',
+            })
+          ),
+          animate(
+            800,
+            style({
+              transform: 'translateX(100px)',
+              opacity: 0,
+            })
+          ),
+        ]),
       ]),
     ]),
   ],
