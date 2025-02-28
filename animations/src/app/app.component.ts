@@ -1,5 +1,6 @@
 import {
   animate,
+  AnimationEvent,
   group,
   keyframes,
   state,
@@ -181,5 +182,13 @@ export class AppComponent {
 
   onDelete(item: string) {
     this.list.splice(this.list.indexOf(item), 1);
+  }
+
+  animationStarted($event: AnimationEvent) {
+    console.log($event);
+  }
+
+  animationEnded($event: AnimationEvent) {
+    console.log($event);
   }
 }
